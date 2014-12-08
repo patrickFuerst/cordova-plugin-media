@@ -20,3 +20,28 @@
 # org.apache.cordova.media
 
 Plugin documentation: [doc/index.md](doc/index.md)
+
+
+#Added Audio metering to the iOS plugin.
+
+```
+    @media = new Media("/dev/null",
+        () -> console.log "Media success"
+        (err) -> console.log "Media error " + err
+     );
+    @media.startRecord { meterAudioLevel: true}
+
+
+    @volume = -160
+    _media = @media
+    me = @
+    setInterval(
+        () ->
+            _media.getAverageVolume(
+                (value) ->
+                    me.volume = value
+                (e) ->  console.log "Error:" + e
+                0
+            )
+        , 100)
+```
